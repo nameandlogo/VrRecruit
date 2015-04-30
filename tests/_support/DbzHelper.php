@@ -1,7 +1,8 @@
 <?php
+
 namespace Codeception\Module;
 
-class DbzHelper extends \Codeception\Module implements \Codeception\Util\DbInterface
+class DbzHelper extends \Codeception\Module\MysqlHelper
 {
     public function getDbAdapter()
     {
@@ -22,10 +23,13 @@ class DbzHelper extends \Codeception\Module implements \Codeception\Util\DbInter
         try {
             $this->getDbAdapter()->rollback();
         } catch (\Exception $e) {
-            if ($e->getMessage() == \Magento\DB\Adapter\AdapterInterface::ERROR_ASYMMETRIC_ROLLBACK_MESSAGE) {
+            if ($e->getMessage() == \Magento\Framework\DB\Adapter\AdapterInterface::ERROR_ASYMMETRIC_ROLLBACK_MESSAGE) {
                 // Catch exception that means that the DB query failed!
                 // This usually happens because something else failed in the query.
                 // eg. "Integrity constraint violation"
+                // To debug this sometimes is easier to switch back
+                // to the regular db adapter in the db.php instead of using the magento.
+                // Also remember to turn cleanup=true in the *.suite.yml
             } else {
                 throw $e;
             }
@@ -34,7 +38,7 @@ class DbzHelper extends \Codeception\Module implements \Codeception\Util\DbInter
 
     public function haveInDatabase($table, array $data)
     {
-        $query = $this->getModule('Db')->driver->insert($table, $data);
+        $query = $this->getModule('MysqlHelper')->driver->insert($table, $data);
         $this->debugSection('Query', $query);
 
         $sth = $this->getDbAdapter()->insert($table, $data);
@@ -89,6 +93,7 @@ class DbzHelper extends \Codeception\Module implements \Codeception\Util\DbInter
 
             $this->debugSection('Query',$query, $params);
             $column = $this->getDbAdapter()->fetchCol($query, array_values($criteria));
+            \PHPUnit_Framework_Assert::assertNotEmpty($column);
             return $column[$row];
         } else {
             $query = "select %s from %s";

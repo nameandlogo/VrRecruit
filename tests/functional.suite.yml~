@@ -1,6 +1,6 @@
-class_name: UnitTester
+class_name: FunctionalTester
 modules:
-    enabled: [Asserts, UnitHelper, MysqlHelper, ZF1IncludeHelper, DbzHelper]
+    enabled: [Asserts, REST, MysqlHelper, ZF1, FunctionalHelper, DbzHelper, GuzzleHelper]
 
     config:
         MysqlHelper:
@@ -10,8 +10,6 @@ modules:
             dump: tests/_data/dump.sql
             populate: true
             cleanup: false
-            cleanup: false
-            mysqlBin: 'mysql'
         DbzHelper:
             dsn: 'mysql:host=127.0.0.1;dbname=vreasy_task_confirmation_test'
             user: 'ubuntu'
@@ -19,4 +17,10 @@ modules:
             dump: tests/_data/dump.sql
             populate: true
             cleanup: false
-
+        REST:
+            timeout: 90
+        ZF1:
+            env: 'test'
+            app_path: 'vreasy/application'
+            lib_path: 'library'
+            config: 'vreasy/application/configs/application.ini'

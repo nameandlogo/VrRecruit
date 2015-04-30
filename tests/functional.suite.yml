@@ -1,17 +1,24 @@
-class_name: TestGuy
+class_name: FunctionalTester
 modules:
-    enabled: [REST, Db, ZF1, TestHelper, DbzHelper, GuzzleHelper]
+    enabled: [Asserts, REST, MysqlHelper, ZF1, FunctionalHelper, DbzHelper]
 
     config:
-        REST:
-            timeout: 90
-        Db:
+        MysqlHelper:
             dsn: 'mysql:host=127.0.0.1;dbname=vreasy_task_confirmation_test'
             user: 'ubuntu'
             password: ''
             dump: tests/_data/dump.sql
             populate: true
             cleanup: false
+        DbzHelper:
+            dsn: 'mysql:host=127.0.0.1;dbname=vreasy_task_confirmation_test'
+            user: 'ubuntu'
+            password: ''
+            dump: tests/_data/dump.sql
+            populate: true
+            cleanup: false
+        REST:
+            timeout: 90
         ZF1:
             env: 'test'
             app_path: 'vreasy/application'
