@@ -29,7 +29,7 @@ Getting started
     ```
     composer install --dev --no-interaction --prefer-dist
     ```
-4. Create the database and setup the db user permissions (See the [db.ini](blob/master/task-confirmation/application/configs/db.ini)).
+4. Create the database and setup the db user permissions (See the [db.ini](https://github.com/Vreasy/VrRecruit/blob/task-confirmation/vreasy/application/configs/db.ini)).
     4. DB User: ```vreasy```
     4. DB Password: ```;FeA336101-vreasy_task_confirmation```
     4. Development db ```vreasy_task_confirmation```
