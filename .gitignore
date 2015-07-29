@@ -13,6 +13,7 @@ vendor
 *.orig
 *.DS_*
 tests/_log/*
+tests/*/*Tester.php
 /.settings/org.eclipse.core.resources.prefs
 node_modules/
 vreasy/public/bower_components/*
