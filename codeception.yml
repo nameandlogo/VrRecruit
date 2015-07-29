@@ -1,20 +1,21 @@
+actor: Tester
 paths:
     tests: tests
-    log: tests/_log
+    log: tests/_output
     data: tests/_data
-    helpers: tests/_helpers
+    helpers: tests/_support
 settings:
     bootstrap: _bootstrap.php
-    suite_class: \PHPUnit_Framework_TestSuite
     colors: true
     memory_limit: 1024M
-    log: true
 modules:
     config:
         Db:
-            dsn: 'mysql:host=127.0.0.1;dbname=vreasy_task_confirmation_test'
-            user: 'vreasy'
-            password: ';FeA336101-vreasy_task_confirmation'
+            dsn: ''
+            user: ''
+            password: ''
             dump: tests/_data/dump.sql
-            populate: false
-            cleanup: true
+groups:
+    p*: tests/_output/p*
+extensions:
+    enabled: [Codeception\Platform\RunFailed]

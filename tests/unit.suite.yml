@@ -1,12 +1,22 @@
-class_name: CodeGuy
+class_name: UnitTester
 modules:
-    enabled: [Db, CodeHelper, DbzHelper]
+    enabled: [Asserts, UnitHelper, MysqlHelper, ZF1IncludeHelper, DbzHelper]
 
     config:
-        Db:
+        MysqlHelper:
             dsn: 'mysql:host=127.0.0.1;dbname=vreasy_task_confirmation_test'
             user: 'ubuntu'
             password: ''
             dump: tests/_data/dump.sql
             populate: true
             cleanup: false
+            cleanup: false
+            mysqlBin: 'mysql'
+        DbzHelper:
+            dsn: 'mysql:host=127.0.0.1;dbname=vreasy_task_confirmation_test'
+            user: 'ubuntu'
+            password: ''
+            dump: tests/_data/dump.sql
+            populate: true
+            cleanup: false
+
