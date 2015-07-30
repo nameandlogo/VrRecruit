@@ -52,11 +52,11 @@
     "require-dev": {
         "codeception/codeception": "2.0.x-dev",
         "magento/community-edition": "dev-master#67519d4eacb2dc0824a2824cdb1cacb3afef20ed",
-        "phpdocumentor/phpdocumentor": "2.*",
         "codeception/robo-paracept":"@dev",
         "codegyre/robo": "*",
         "codeception/specify": "*",
-        "codeception/verify": "*"
+        "codeception/verify": "*",
+        "phpdocumentor/phpdocumentor": "dev-master"
     },
     "autoload": {
         "psr-0": { "": ["library/"] }
