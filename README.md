@@ -14,7 +14,7 @@ You can find the briefing for this task in [The Vreasy Developer’s Quiz docume
 Getting started
 ---------------
 1. Setup project dependencies:
-    1. php >= 5.4,
+    1. php >= 5.6,
     1. Apache Server >= 2.4
     1. MySQL >= 5.4
     1. npm Package manager
