@@ -1,0 +1,22 @@
+<h1>
+New Task Details <br /> {{twilioMsg.twilio_message}}
+</h1>
+<h2>
+Deadline {{task.deadline}}
+</h2>
+<div ng-controller="sendMsg"  >
+    <form ng-submit="submit()" novalidate>
+    	<input type="hidden" ng-model="task.id">
+    	<input type="hidden" ng-model="task.assigned_phone">
+    	<input type="hidden" ng-model="task.deadline">
+        <input type="text" name="message" ng-model="message" ng-minlength="5" ng-maxlength="12"> Message <br/>
+    	  <select ng-model="status">
+	      <option value="0">Please Select Responce</option>
+	      <option value="2">Accecpt Task</option>
+	      <option value="3">Reject Task</option>
+	    </select>
+    	<br />
+    	<input class="btn" type="submit" value="Send reply">
+    </form>
+</div>
+<a href="" class="btn" ui-sref="index()">Reply Later Thanks</a>

@@ -11,7 +11,7 @@ class Vreasy_TaskController extends Vreasy_Rest_Controller
         parent::preDispatch();
         $req = $this->getRequest();
         $action = $req->getActionName();
-        $contentType = $req->getHeader('Content-Type');
+		$contentType = $req->getHeader('Content-Type');
         $rawBody     = $req->getRawBody();
         if ($rawBody) {
             if (stristr($contentType, 'application/json')) {
@@ -53,6 +53,7 @@ class Vreasy_TaskController extends Vreasy_Rest_Controller
     {
         $this->view->tasks = $this->tasks;
         $this->_helper->conditionalGet()->sendFreshWhen(['etag' => $this->tasks]);
+        
     }
 
     public function newAction()

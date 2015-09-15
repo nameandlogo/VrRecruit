@@ -1,0 +1,41 @@
+<h1>
+Showing details for task {{task.id}}
+</h1>
+<h2>
+Deadline {{task.deadline}}
+</h2>
+<table>
+  <tr>
+    <th>Deadline</th>
+    <th>Status</th>
+    <th>Message</th>
+    <th>Updated</th>
+    
+  </tr>
+
+  <tr ng-repeat="msg in msgs | filter : {task_id: task.id}" ng-model="task.id">
+    <td>{{task.deadline}}</td>
+    <td>
+	    <div ng-switch on="msg.status">
+	      <span style="color:green;" ng-switch-when="2">ACCEPTED</span>
+	      <span style="color:red;" ng-switch-when="3">REJECTED</span>
+	      <span style="color:green;" ng-switch-when="4">COMPLETED</span>
+	      <span style="color:orange;" ng-switch-default>PENDING</span>
+	  	</div>
+    </td>
+    <td>{{msg.twilio_message}}</td>
+    <td>{{msg.created_at}}</td>
+  </tr>
+  
+</table>
+<a href="" class="btn" ui-sref="index()">Back</a>
+<div ng-controller="sendMsg"  >
+    <form ng-submit="submit()" novalidate>
+    	<input type="hidden" ng-model="task.id">
+    	<input type="hidden" ng-model="task.assigned_phone">
+    	<input type="hidden" ng-model="task.deadline">
+    	<input type="hidden" ng-model="status" >
+    	<input type="hidden" ng-model="message">
+       <input class="btn" type="submit" value="Mark as complete">
+    </form>
+</div>

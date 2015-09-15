@@ -23,9 +23,16 @@
     <td>{{task.assigned_name}}</td>
     <td>{{task.assigned_phone}}</td>
     <td>
-      <a href="" class="btn" disabled>
+      <a class="btn" ui-sref="show({ id: task.id })" >
         Show
+      </a>
+      <a class="btn" ng-click="msgTest(task.id)" >
+        Assignee Reply Test
       </a>
     </td>
   </tr>
 </table>
+		<input ng-model="newTask.deadline" placeholder="Deadline"><br />
+        <input ng-model="newTask.assigned_phone" placeholder="Phone"><br />
+        <input ng-model="newTask.assigned_name" placeholder="Assignee"><br />
+<a class="btn" ng-click="addTask(newTask); newTask = {}">New Task</a>
