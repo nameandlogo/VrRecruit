@@ -65,7 +65,7 @@ angular.module('taskConfirmationApp',  ['ui.router', 'ngResource'])
     
     $scope.addTask = function(task) {
        Task.create(task).$promise.then(function(newTask) {
-       	
+       	  	
 	      twiml = {};
 	      twiml.task_id = newTask.id;
 	      twiml.status = 1;
@@ -74,7 +74,18 @@ angular.module('taskConfirmationApp',  ['ui.router', 'ngResource'])
 	      
       	  Twilio.create(twiml).$promise.then(function(newMsg) {
 	      		$location.path('/showtwilio/'+ newMsg.id);
-      	 	});
+	      	}).catch(function(error) {
+	      				alert('Error*****Task was not assigned');
+                        twiml = {};
+	      				twiml.task_id = newTask.id;
+	      				twiml.status = 5;
+	      				twiml.twilio_phone = newTask.assigned_phone;
+	      				twiml.twilio_message = 'This task has not been assigned';
+	      				
+	      				Twilio.create(twiml).$promise.then(function(newMsg) {
+	      					$location.path('/show/'+ newTask.id);
+	      				});
+             });
       	 
     	});
     };

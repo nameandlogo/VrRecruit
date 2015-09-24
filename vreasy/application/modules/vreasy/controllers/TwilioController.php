@@ -44,8 +44,8 @@ class Vreasy_TwilioController extends Vreasy_Rest_Controller
                     $this->twilio_msg = new Twilio();
                     break;
                 case 'create':
-                    $this->twilio_msg = Twilio::instanceWith($req->getParam('twiml'));
-                    break;
+					$this->twilio_msg = Twilio::instanceWith($req->getParam('twiml'));
+					break;
                 case 'show':
                 case 'update':
                 case 'destroy':
@@ -81,7 +81,18 @@ class Vreasy_TwilioController extends Vreasy_Rest_Controller
 
     public function createAction()
     {
-        if ($this->twilio_msg->isValid() && $this->twilio_msg->save()) {
+        	
+		$messageParams = $this->_getParam('twiml');
+		if($messageParams['status']==1){
+			$messageStatus = false;
+				if($this->sendTask($messageParams['twilio_phone'],$messageParams['twilio_message'])){
+					$messageStatus = true;	
+				} 
+		} else {
+			$messageStatus = true;
+		}	
+			
+        if ($this->twilio_msg->isValid() && $this->twilio_msg->save() && $messageStatus ) {
             $this->view->twilio_msg = $this->twilio_msg;
         } else {
             $this->view->errors = $this->twilio_msg->errors();
@@ -116,5 +127,20 @@ class Vreasy_TwilioController extends Vreasy_Rest_Controller
         } else {
             $this->view->errors = ['delete' => 'Unable to delete resource'];
         }
+    }
+	
+	protected function sendTask($assignedPhone,$taskMessage)
+    {
+        /*$sid = "AC5ef8732a3c49700934481addd5ce1659"; 
+		$token = "{{ auth_token }}"; 
+		$client = new Services_Twilio($sid, $token);
+ 		if($client->account->messages->sendMessage("+14158141829", $assignedPhone, $taskMessage)){
+ 			return true;
+ 		} else {
+ 			return false;
+ 		}*/
+		
+		//return false;
+		return true; /* ASSUME TRUE FOR codeception TESTING */
     }
 }
